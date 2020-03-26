@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>D3 Basics</title>
+  </head>
+  <body>
+    <!-- <p>Hello</p>
+    <p>World</p>
+    <p>Hello</p>
+    <p>World</p>
+    <p>Hello</p>
+    <p>World</p> -->
+
+    <script src="https://d3js.org/d3.v5.js"></script>
+
+    <script>
+      d3.selectAll("p").style("color", "blue");
+      //   d3.select("body").style("background-color", "black");
+      d3.selectAll("p").style("color", function(d, i) {
+        return i % 2 ? "#fff" : "red";
+      });
+      d3.selectAll("p")
+        .data([4, 8, 15, 16, 23, 42])
+        .style("font-size", d => {
+          return d * 0.2 + "em";
+        });
+      d3.select("body")
+        .selectAll("p")
+        .data([4, 8, 13, 23, 12, 43])
+        .enter()
+        .append("p")
+        .text(function(d) {
+          return "I'm number " + d + "!";
+        });
+
+      // Update is Default
+      var p = d3
+        .select("body")
+        .selectAll("p")
+        .data([4, 8, 15, 16, 23, 42])
+        .text(function(d) {
+          return d;
+        });
+
+      // Enter
+      p.enter()
+        .append("p")
+        .text(function(d) {
+          return d;
+        });
+
+      // Exit
+      p.exit().remove();
+      d3.select("body")
+        .transition()
+        .duration(750)
+        .style("background-color", "black");
+    </script>
+  </body>
+</html>
